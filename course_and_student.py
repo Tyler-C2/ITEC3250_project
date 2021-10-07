@@ -21,24 +21,39 @@ class Course():
         return "Student not found"
         
     def course_avg(self):
-        sum = 0
+        exam_sums = [0,0,0]
+        avg_lst = []
 
         for student in self.students:
-            single_average = self.student_avg(student.student_id)
-            sum += single_average
+            for i in range(len(student.grades)):
+                exam_sums[i] += student.grades[i]
 
-        return round(sum / len(self.students), 2)
+        for sum in exam_sums:
+            avg_lst.append(round(sum / len(self.students), 2))
+
+        return avg_lst
 
     def course_median(self):
-        temp_lst = []
+        exam_grouping = [[],[],[]]
+        medians = []
         for student in self.students:
-            temp_lst += student.grades
+            for i in range(len(student.grades)):
+                exam_grouping[i].append(student.grades[i])
 
-        return stat.median(temp_lst)
+        for group in exam_grouping:
+            medians.append(stat.median(group))
+            
+        return medians
 
     def course_mode(self):
-        temp_lst = []
+        exam_grouping = [[],[],[]]
+        modes = []
+
         for student in self.students:
-            temp_lst += student.grades
+            for i in range(len(student.grades)):
+                exam_grouping[i].append(student.grades[i])
+
+        for group in exam_grouping:
+            modes.append(stat.mode(group))
         
-        return stat.mode(temp_lst)
+        return modes
