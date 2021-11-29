@@ -48,16 +48,19 @@ class InputTab(Frame):
     def addInput(self):
         entered_str = self.input_str.get()
         
-        for i in range(len(entered_str)):
-            if not entered_str[i].isdigit() and entered_str[i] != ",":
-                self.confirm_label.config(text="Bad CSV string.")
-                return
-        
-        #if numbers, only and multiples of 4 csv:
-        #    a
-
-        if len(entered_str) > 0:
+        if len(entered_str) == 0:
+            self.confirm_label.config(text="No input detected. Please try again.")
+        else:
+            for i in range(len(entered_str)):
+                if not entered_str[i].isdigit() and entered_str[i] != ",":
+                    self.confirm_label.config(text="Bad CSV string: Only numbers and commas allowed.")
+                    return
+            
             temp_name = entered_str.split(',')
+            # multiple of 4?
+            if int(len(temp_name)) % 4 != 0:
+                self.confirm_label.config(text="Bad CSV string: List isn't a multiple of 4.")
+                return
 
             for i in range(len(temp_name)):
                 temp_name[i] = int(temp_name[i])
@@ -68,9 +71,6 @@ class InputTab(Frame):
                 new_gui.course.create_student(s_lst)
 
             self.confirm_label.config(text="Student information processed.")
-        
-        else:
-            self.confirm_label.config(text="No input detected. Please try again.")
 
 
 class ClassTab(Frame):
