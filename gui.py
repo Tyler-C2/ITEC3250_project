@@ -47,6 +47,14 @@ class InputTab(Frame):
     
     def addInput(self):
         entered_str = self.input_str.get()
+        
+        for i in range(len(entered_str)):
+            if not entered_str[i].isdigit() and entered_str[i] != ",":
+                self.confirm_label.config(text="Bad CSV string.")
+                return
+        
+        #if numbers, only and multiples of 4 csv:
+        #    a
 
         if len(entered_str) > 0:
             temp_name = entered_str.split(',')
