@@ -8,7 +8,33 @@ class Student():
 class Course():
     def __init__(self):
         self.students=[]
+    
+    def parse_csv(self, entered_str):
+        if len(entered_str) == 0:
+            return "No input detected. Please try again."
+        else:
+            for i in range(len(entered_str)):
+                if not entered_str[i].isdigit() and entered_str[i] != ",":
+                    return "Bad CSV string: Only numbers and commas allowed."
+            
+            temp_name = entered_str.split(',')
+            # multiple of 4?
+            if int(len(temp_name)) % 4 != 0:
+                return "Bad CSV string: List isn't a multiple of 4."
 
+            for i in range(len(temp_name)):
+                if len(temp_name[i]) == 0:
+                    return "Bad CSV string: At least one value is empty."
+                    
+                temp_name[i] = int(temp_name[i])
+
+            nums = temp_name # replace with the inputbox after it is made a lst 
+            for i in range(0,len(nums),4):
+                s_lst = [nums[i],nums[i+1],nums[i+2],nums[i+3]]
+                self.create_student(s_lst)
+
+            return "Student information processed."
+    
     def create_student(self, lst):
         new_student = Student(lst[0],lst[1:])
         self.students.append(new_student)
