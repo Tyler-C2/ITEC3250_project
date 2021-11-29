@@ -31,6 +31,10 @@ class Course():
             nums = temp_name # replace with the inputbox after it is made a lst 
             for i in range(0,len(nums),4):
                 s_lst = [nums[i],nums[i+1],nums[i+2],nums[i+3]]
+                for i in range(len(s_lst)):
+                    if i != 0:
+                        if s_lst[i] < 0 or s_lst[i] > 100:
+                            return "Bad CSV string: An exam score is out of range 0-100."
                 self.create_student(s_lst)
 
             return "Student information processed."
