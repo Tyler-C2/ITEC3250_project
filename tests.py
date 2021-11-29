@@ -11,6 +11,10 @@ if __name__ == "__main__":
     new_course = Course()
 
     test_data = [1452,89,75,64,2563,99,56,32,8546,85,75,68]
+    test_str = ','.join([str(i) for i in test_data])
+    empty_test_str = test_str + ","
+    multiple_test_str = test_str + ",40"
+    oor_test_str = test_str + ",101"
     
     # for avg tests
     student_id_for_testing = [1452,2563,8546,5555,69421,3564]
@@ -33,7 +37,15 @@ if __name__ == "__main__":
        assert course_instance.course_median() == answer        
 
     def test_mode(course_instance, answer):
-       assert course_instance.course_mode() == answer        
+       assert course_instance.course_mode() == answer    
+    
+    def test_case1():
+        c = Course()
+        ret_good = "Student information processed."
+        if c.parse_csv(test_str) == ret_good and c.parse_csv(empty_test_str) != ret_good and c.parse_csv(multiple_test_str) != ret_good and c.parse_csv(oor_test_str) != ret_good:
+            print("Test Case 1: Pass")
+        else:
+            print("Test Case 1: FAIL")
 
     # test execution
     addInput(test_data) 
@@ -41,3 +53,4 @@ if __name__ == "__main__":
     test_course_avg(new_course, [91.0, 68.67, 54.67])
     test_median(new_course, [89, 75, 64])
     test_mode(new_course, [89, 75, 64])
+    test_case1()
