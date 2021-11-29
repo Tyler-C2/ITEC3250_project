@@ -11,6 +11,9 @@ if __name__ == "__main__":
     new_course = Course()
 
     test_data = [1452,89,75,64,2563,99,56,32,8546,85,75,68]
+    id1_scores = [89, 75, 64]
+    id2_scores = [99, 56, 32]
+    id3_scores = [85, 75, 68]
     test_str = ','.join([str(i) for i in test_data])
     empty_test_str = test_str + ","
     multiple_test_str = test_str + ",40"
@@ -43,9 +46,18 @@ if __name__ == "__main__":
         c = Course()
         ret_good = "Student information processed."
         if c.parse_csv(test_str) == ret_good and c.parse_csv(empty_test_str) != ret_good and c.parse_csv(multiple_test_str) != ret_good and c.parse_csv(oor_test_str) != ret_good:
-            print("Test Case 1: Pass")
+            print("Test Case 1 (Correctly parse CSV): Pass")
         else:
-            print("Test Case 1: FAIL")
+            print("Test Case 1 (Correctly parse CSV): FAIL")
+            
+    def test_case2():
+        c = Course()
+        ret_good = "Student information processed."
+        if c.parse_csv(test_str) == ret_good:
+            print("TODO CHECK EACH STuDENTS SCORES AND THE AVG")
+            print("Test Case 2 (Student Scores): Pass")
+        else:
+            print("Test Case 2 (Student Scores): FAIL")
 
     # test execution
     addInput(test_data) 
@@ -54,3 +66,4 @@ if __name__ == "__main__":
     test_median(new_course, [89, 75, 64])
     test_mode(new_course, [89, 75, 64])
     test_case1()
+    test_case2()
