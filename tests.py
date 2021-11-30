@@ -53,11 +53,20 @@ if __name__ == "__main__":
     def test_case2():
         c = Course()
         ret_good = "Student information processed."
+        #   2) Correctly display each student’s scores for each of the three exams as well as their average of the three. SUPPORTS FUNCTIONAL REQUIREMENT #2 WITH AVERAGE; INDIVIDUAL SCORES IS ADDITIONAL FOR TESTING EARLY CODE.
         if c.parse_csv(test_str) == ret_good:
-            print("TODO CHECK EACH STuDENTS SCORES AND THE AVG")
-            print("Test Case 2 (Student Scores): Pass")
+            print("Test Case 2 (Student Scores): TODO")
         else:
             print("Test Case 2 (Student Scores): FAIL")
+            
+    def test_case3():
+        c = Course()
+        ret_good = "Student information processed."
+        #   3) For each of the three exams, correctly display the exam’s average score, median score, and score range (minimum-maximum). SUPPORTS FUNCTIONAL REQUIREMENT #3.
+        if c.parse_csv(test_str) == ret_good:
+            print("Test Case 3 (Avg, Median, Range): TODO")
+        else:
+            print("Test Case 3 (Avg, Median, Range): FAIL")
 
     # test execution
     addInput(test_data) 
@@ -67,3 +76,4 @@ if __name__ == "__main__":
     test_mode(new_course, [89, 75, 64])
     test_case1()
     test_case2()
+    test_case3()
