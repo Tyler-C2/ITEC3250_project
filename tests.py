@@ -23,24 +23,26 @@ if __name__ == "__main__":
     student_id_for_testing = [1452,2563,8546,5555,69421,3564]
     avg_answers = [76,62.33,76,"Student not found","Student not found","Student not found"]
 
-    def addInput(test_data):
-        n = test_data
-        for i in range(0,len(n),4):
-            s_lst = [n[i],n[i+1],n[i+2],n[i+3]]
-            new_course.create_student(s_lst)
+    #def addInput(test_data):
+    #    n = test_data
+    #    for i in range(0,len(n),4):
+    #        s_lst = [n[i],n[i+1],n[i+2],n[i+3]]
+    #        new_course.create_student(s_lst)
 
     def test_student_avg(course_instance, ids, answers):
         for i in range(len(ids)):
-            assert course_instance.student_avg(ids[i]) == answers[i]
+            if course_instance.student_avg(ids[i]) != answers[i]:
+                return False
+        return True
 
-    def test_course_avg(course_instance, answer):
-        assert course_instance.course_avg() == answer
+    #def test_course_avg(course_instance, answer):
+    #    assert course_instance.course_avg() == answer
 
-    def test_median(course_instance, answer):
-       assert course_instance.course_median() == answer        
+    #def test_median(course_instance, answer):
+    #   assert course_instance.course_median() == answer
 
-    def test_mode(course_instance, answer):
-       assert course_instance.course_mode() == answer    
+    #def test_mode(course_instance, answer):
+    #   assert course_instance.course_mode() == answer
     
     def test_case1():
         c = Course()
@@ -55,8 +57,25 @@ if __name__ == "__main__":
         ret_good = "Student information processed."
         #   2) Correctly display each student’s scores for each of the three exams as well as their average of the three. SUPPORTS FUNCTIONAL REQUIREMENT #2 WITH AVERAGE; INDIVIDUAL SCORES IS ADDITIONAL FOR TESTING EARLY CODE.
         if c.parse_csv(test_str) == ret_good:
-            print("Test Case 2 (Student Scores): TODO")
+            # csv parsed right
+            if not test_student_avg(c, student_id_for_testing, avg_answers):
+                # student avgs are incorrect
+                print("Test Case 2 (Student Scores): FAIL")
+            else:
+                # student avgs are correct
+                
+                # check students scores
+                students = []
+                for i in range(len(c.students)):
+                    students.append(c.students[i].student_id)
+                    for k in range(len(c.students[i].grades)):
+                        students.append(c.students[i].grades[k])
+                if students == test_data:
+                    print("Test Case 2 (Student Scores): Pass")
+                else:
+                    print("Test Case 2 (Student Scores): FAIL")
         else:
+            # csv parse fail
             print("Test Case 2 (Student Scores): FAIL")
             
     def test_case3():
@@ -69,11 +88,10 @@ if __name__ == "__main__":
             print("Test Case 3 (Avg, Median, Range): FAIL")
 
     # test execution
-    addInput(test_data) 
-    test_student_avg(new_course, student_id_for_testing, avg_answers)
-    test_course_avg(new_course, [91.0, 68.67, 54.67])
-    test_median(new_course, [89, 75, 64])
-    test_mode(new_course, [89, 75, 64])
+    #addInput(test_data) 
+    #test_course_avg(new_course, [91.0, 68.67, 54.67])
+    #test_median(new_course, [89, 75, 64])
+    #test_mode(new_course, [89, 75, 64])
     test_case1()
     test_case2()
     test_case3()
